@@ -74,7 +74,7 @@ fun CharacterRow(
         Column(
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
-            Text(text = character.firstName, fontSize = 21.sp)
+            Text(text = character.fullName, fontSize = 21.sp)
             Text(text = character.title)
         }
     }
