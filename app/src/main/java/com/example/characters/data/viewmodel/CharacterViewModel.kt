@@ -17,9 +17,6 @@ class CharacterViewModel @Inject constructor(
     private var _characterList = MutableStateFlow(ListUiState(listOf()))
     var characterList: StateFlow<ListUiState> = _characterList
 
-//    init {
-//        getCharacterList()
-//    }
 
 
     fun getCharacterList() {
@@ -34,13 +31,3 @@ class CharacterViewModel @Inject constructor(
         }
     }
 }
-
-/*class CharacterViewModelFactory @Inject constructor(private val repository: CharactersRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CharactersRepository::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CharacterViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}*/
