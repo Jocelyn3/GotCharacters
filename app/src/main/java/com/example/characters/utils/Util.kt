@@ -7,6 +7,8 @@ import android.os.Build
 import com.example.characters.data.model.GotCharacter
 
 object Util {
+    const val GOT_CHARACTERS_DATABASE = "got_characters_database"
+    const val CHARACTER_TABLE = "character_table"
     const val CHARACTERS_ENDPOINT = "Characters"
     const val BASE_URL = "https://thronesapi.com/api/v2/"
     val list: List<GotCharacter> = listOf(

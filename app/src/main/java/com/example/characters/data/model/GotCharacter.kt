@@ -1,13 +1,19 @@
 package com.example.characters.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.characters.utils.Util
+
+@Entity(tableName = Util.CHARACTER_TABLE)
 data class GotCharacter (
-    val id: Int,
-    val firstName: String,
-    val lastName: String,
-    val fullName: String,
-    val title: String,
-    val family: String,
-    val imageUrl: String
+    @PrimaryKey(autoGenerate = false) @ColumnInfo(name = "id") val id: Int,
+    @ColumnInfo(name = "first_name") val firstName: String,
+    @ColumnInfo(name = "last_name") val lastName: String,
+    @ColumnInfo(name = "full_name") val fullName: String,
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "family") val family: String,
+    @ColumnInfo(name = "image_url") val imageUrl: String
 ) {
     override fun toString(): String {
         return "$firstName; " +

@@ -26,6 +26,9 @@ import com.example.characters.utils.Util
 fun CharacterListFragment(
     viewModel: CharacterViewModel
 ) {
+
+    viewModel.getCharacterList()
+
     CharactersTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -36,6 +39,8 @@ fun CharacterListFragment(
             CharacterList(list)
         }
     }
+
+    viewModel.updateLocalData()
 
 }
 

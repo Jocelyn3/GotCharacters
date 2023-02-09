@@ -17,14 +17,20 @@ class CharacterViewModel @Inject constructor(
     private var _characterList = MutableStateFlow(ListUiState(listOf()))
     var characterList: StateFlow<ListUiState> = _characterList
 
-    init {
-        getFrenchNewsList()
-    }
+//    init {
+//        getCharacterList()
+//    }
 
 
-    private fun getFrenchNewsList() {
+    fun getCharacterList() {
         viewModelScope.launch {
             _characterList.value = ListUiState(repository.getCharacters())
+        }
+    }
+
+    fun updateLocalData() {
+        viewModelScope.launch {
+            repository.updateLocalDatabase()
         }
     }
 }
