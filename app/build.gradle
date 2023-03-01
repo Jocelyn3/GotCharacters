@@ -8,12 +8,12 @@ plugins {
 }
 
 android {
-    namespace 'com.example.characters'
+    namespace 'com.example.weather'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.characters"
-        minSdk 21
+        applicationId "com.example.weather"
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    def nav_version = "2.5.3"
+    implementation "androidx.navigation:navigation-compose:$nav_version"
 
     // Coil : For setting image through it's link
     implementation "io.coil-kt:coil-compose:2.1.0"
