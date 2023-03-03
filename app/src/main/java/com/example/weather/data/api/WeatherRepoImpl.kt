@@ -67,7 +67,6 @@ class WeatherRepoImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-//    override suspend fun updateLocalDb(citySearched: String) = flow{
     override suspend fun updateLocalDb() = flow{
         try {
             emit(Resource.Loading)
@@ -79,15 +78,10 @@ class WeatherRepoImpl @Inject constructor(
                 for (weather in list) {
                     val city = insertWeatherInDb(weather.name?.let { api.getWeather(it) })
                     city?.let { finalList.add(it) }
-                    dao.deleteAll()
-                    dao.insertAll(finalList)
-                    emit(Resource.Success(finalList))
                 }
+                emit(Resource.Success(finalList))
             }
 
-//            val result = api.getWeather(citySearched)
-//            val cityWeather = insertWeatherInDb(result)
-//            emit(Resource.Success(cityWeather))
         }catch (e: java.lang.Exception) {
             emit(Resource.Failure(e))
         }
