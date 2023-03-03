@@ -23,4 +23,7 @@ interface WeatherDao {
 
     @Query("DELETE FROM ${Util.WEATHER_TABLE}")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM ${Util.WEATHER_TABLE} WHERE name = :name")
+    suspend fun delete(name: String)
 }

@@ -67,6 +67,10 @@ class WeatherRepoImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
+    override suspend fun delete(cityName: String) {
+        dao.delete(cityName)
+    }
+
     override suspend fun updateLocalDb(): List<WeatherCityEntity> {
 
             val list = dao.getWeatherCityList()
@@ -85,8 +89,4 @@ class WeatherRepoImpl @Inject constructor(
     override suspend fun getWeatherFromLocalDb(cityName: String): WeatherCityEntity {
         return dao.getWeatherCity(cityName)
     }
-
-
-
-
 }

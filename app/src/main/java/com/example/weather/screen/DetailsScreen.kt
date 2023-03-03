@@ -1,9 +1,7 @@
 package com.example.weather.screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -12,23 +10,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.weather.data.viewmodel.WeatherViewModel
 
 @Composable
 fun DetailsScreen(
+    navController: NavController,
     cityName: String?) {
+
+    val viewModel = hiltViewModel<WeatherViewModel>()
+    if (cityName != null)
+        viewModel.getWeatherCity(cityName)
+
+    val cityState by viewModel.weatherCity.collectAsState()
+    val city = cityState.weatherCity
+
     Column(
-        modifier = Modifier.fillMaxSize().padding(11.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(11.dp),
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {
-        val viewModel = hiltViewModel<WeatherViewModel>()
 
         cityName?.let {
-            viewModel.getWeatherCity(cityName)
-
-            val cityState by viewModel.weatherCity.collectAsState()
-            val city = cityState.weatherCity
-
             city?.let {
 
                 city.name?.let { Text(text = it, fontSize = 21.sp, modifier = Modifier.padding(bottom = 7.dp)) }
@@ -44,11 +48,19 @@ fun DetailsScreen(
                 Text(text = "Pression: ${city.pressure}", fontSize = 17.sp)
                 Text(text = "Humidité: ${city.humidity}", fontSize = 17.sp)
 
+                Button(
+                    onClick = {
+                        viewModel.delete(cityName)
+                        navController.popBackStack()
+                    },
+                    modifier = Modifier.padding(top = 19.dp)
+                ) {
+                    Text(text = "Delete")
+                }
+
 
             }
         }
-
-
-
     }
+    
 }

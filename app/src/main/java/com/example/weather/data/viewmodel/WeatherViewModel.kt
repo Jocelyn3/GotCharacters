@@ -82,4 +82,10 @@ class WeatherViewModel @Inject constructor(
             repository.updateLocalDb()
         }
     }
+
+    fun delete(name: String) {
+        viewModelScope.launch {
+            repository.delete(name)
+        }
+    }
 }

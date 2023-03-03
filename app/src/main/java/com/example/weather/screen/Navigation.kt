@@ -29,7 +29,7 @@ fun Navigation(context: Context) {
                 }
             )
         ) { entry ->
-            DetailsScreen(cityName = entry.arguments?.getString("city_name"))
+            DetailsScreen(navController = navController, cityName = entry.arguments?.getString("city_name"))
         }
     }
 }
