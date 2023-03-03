@@ -67,9 +67,7 @@ class WeatherRepoImpl @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun updateLocalDb() = flow{
-        try {
-            emit(Resource.Loading)
+    override suspend fun updateLocalDb(): List<WeatherCityEntity> {
 
             val list = dao.getWeatherCityList()
             val finalList = mutableListOf<WeatherCityEntity>()
@@ -79,15 +77,10 @@ class WeatherRepoImpl @Inject constructor(
                     val city = insertWeatherInDb(weather.name?.let { api.getWeather(it) })
                     city?.let { finalList.add(it) }
                 }
-                emit(Resource.Success(finalList))
             }
 
-        }catch (e: java.lang.Exception) {
-            emit(Resource.Failure(e))
-        }
-
-
-    }.flowOn(Dispatchers.IO)
+        return finalList
+    }
 
     override suspend fun getWeatherFromLocalDb(cityName: String): WeatherCityEntity {
         return dao.getWeatherCity(cityName)

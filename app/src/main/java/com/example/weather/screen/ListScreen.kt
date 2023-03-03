@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,7 +39,17 @@ fun ListScreen(
         ) {
             val listState by viewModel.weatherList.collectAsState()
             val list = listState.list
-            WeatherList(list, navController, context)
+            if (listState.isLoading) {
+                Box(modifier = Modifier.padding(9.dp)) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                    )
+                }
+            } else if (listState.error)
+                Text(text = "Erreur lors de la récupération des données!")
+            else if (listState.list != null)
+                WeatherList(list, navController, context)
         }
     }
 

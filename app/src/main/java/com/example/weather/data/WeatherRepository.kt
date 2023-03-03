@@ -10,7 +10,8 @@ interface WeatherRepository {
     suspend fun getAllWeather() : Flow<Resource<List<WeatherCityEntity>>>
     suspend fun getWeatherFromLocalDb(cityName: String) : WeatherCityEntity
     suspend fun insertWeatherInDb(result: Response<JsonObject>?): WeatherCityEntity?
-    suspend fun updateLocalDb(): Flow<Resource<List<WeatherCityEntity>>>
+//    suspend fun updateLocalDb(): Flow<Resource<List<WeatherCityEntity>>>
+    suspend fun updateLocalDb(): List<WeatherCityEntity>
     suspend fun getQueryResponse(cityName: String): Flow<Resource<Response<JsonObject>>>
 
 }
