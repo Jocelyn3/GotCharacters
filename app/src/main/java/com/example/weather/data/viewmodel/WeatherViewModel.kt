@@ -77,19 +77,21 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
-    fun updateLocalData(cityName: String = "") {
+//    fun updateLocalData(cityName: String = "") {
+    fun updateLocalData() {
         viewModelScope.launch {
-            repository.updateLocalDb(cityName).collect{
+//            repository.updateLocalDb(cityName).collect{
+            repository.updateLocalDb().collect{
                 when(it) {
-                    is Resource.Success -> _weatherCity.value = WeatherState(it.data)
+                    is Resource.Success -> _weatherList.value = ListUiState(it.data)
                     is Resource.Loading ->
-                        _weatherCity.value = WeatherState(
-                            weatherCity = null,
+                        _weatherList.value = ListUiState(
+                            list = null,
                             isLoading = true
                         )
                     is Resource.Failure ->
-                        _weatherCity.value = WeatherState(
-                            weatherCity = null,
+                        _weatherList.value = ListUiState(
+                            list = null,
                             error = true
                         )
                 }
