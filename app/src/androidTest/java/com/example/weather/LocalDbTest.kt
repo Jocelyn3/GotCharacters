@@ -82,6 +82,14 @@ class LocalDbTest {
             retrievedList = roomDao.getWeatherCityList()
             TestCase.assertEquals(retrievedList.isEmpty(), true)
 
+            roomDao.insertAll(list)
+            roomDao.delete("Lyon")
+            retrievedList = roomDao.getWeatherCityList()
+            TestCase.assertEquals(retrievedList.isNotEmpty(), true)
+            TestCase.assertEquals(retrievedList.size == 2, true)
+            TestCase.assertEquals(retrievedList[0].name != "Lyon", true)
+            TestCase.assertEquals(retrievedList[1].name != "Lyon", true)
+
         }
     }
 }
